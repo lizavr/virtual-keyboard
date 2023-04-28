@@ -3,7 +3,7 @@
   margin: 50px auto;
 }
 
-.textarea{
+.textarea {
   display: block;
   width: 70vw;
   margin: 10vh auto;
@@ -69,17 +69,16 @@
   font-weight: 500;
   color: rgb(11, 3, 71);
 }
+.button:hover {
+  cursor: pointer;
+  background-color: rgb(55, 41, 62);
+}
 
-.button_active {
+.button.button_active {
   background-color: rgb(93, 155, 160);
   cursor: pointer;
   box-shadow: 0 0 10px 5px #eee994;
   color: #eee994;
-}
-
-.button:hover {
-  cursor: pointer;
-  background-color: rgb(55, 41, 62);
 }
 
 .button_dark {
