@@ -1,0 +1,87 @@
+.container {
+  width: 90vw;
+  margin: 50px auto;
+}
+
+.textarea{
+  display: block;
+  width: 70vw;
+  margin: 10vh auto;
+  height: 25vh;
+  padding: 20px;
+  color: rgb(125, 61, 189);
+  font-size: 3em;
+  border: 3px solid rgb(125, 61, 189);
+}
+
+.keyboard {
+  width: 70vw;
+  margin: 0 auto;
+  border: 3px solid rgb(125, 61, 189);
+  padding: 10px;
+  display: grid;
+  gap: 1vw;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr auto;
+  background-color: rgb(251, 230, 244);
+}
+
+.first-row {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(13, 1fr) 2.4fr;
+  gap: 1vw;
+}
+
+.second-row {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1.2fr repeat(13, 1fr) 1.2fr;
+  gap: 1vw;
+}
+
+.third-row {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 2.4fr repeat(11, 1fr) 2fr;
+  gap: 1vw;
+}
+
+.forth-row {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 2.4fr repeat(10, 1fr) 1.3fr 1.3fr;
+  gap: 1vw;
+}
+
+.fifth-row {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1.3fr repeat(2, 1fr) 6fr 1fr 1fr 1.2fr repeat(2, 1fr);
+  gap: 1vw;
+}
+
+.button {
+  border: 2px solid rgb(24, 4, 42);
+  padding: 5px;
+  text-align: center;
+  background-color: rgb(196, 144, 224);
+  font-weight: 500;
+  color: rgb(11, 3, 71);
+}
+
+.button_active {
+  background-color: rgb(93, 155, 160);
+  cursor: pointer;
+  box-shadow: 0 0 10px 5px #eee994;
+  color: #eee994;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: rgb(55, 41, 62);
+}
+
+.button_dark {
+  background-color: rgb(159, 116, 183);
+}
