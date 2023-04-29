@@ -45,9 +45,96 @@ document.body.append(containerEl);
 
 const allBtnDiv = document.getElementsByClassName('button');
 
+const insertText = (value) => {
+  const beforePosition = textareaEl.selectionStart;
+  const afterPosition = textareaEl.selectionEnd;
+  textareaEl.value = `${textareaEl.value.slice(
+    0,
+    beforePosition
+  )}${value}${textareaEl.value.slice(afterPosition)}`;
+  textareaEl.selectionStart = beforePosition + 1;
+  textareaEl.selectionEnd = beforePosition + 1;
+};
+
+const removeLettersBackSpace = () => {
+  const beforePosition = textareaEl.selectionStart;
+  const afterPosition = textareaEl.selectionEnd;
+  if (beforePosition !== afterPosition) {
+    textareaEl.value = `${textareaEl.value.slice(
+      0,
+      beforePosition
+    )}${textareaEl.value.slice(afterPosition)}`;
+    textareaEl.selectionStart = beforePosition;
+    textareaEl.selectionEnd = beforePosition;
+    return;
+  }
+  if (beforePosition === 0) {
+    return;
+  }
+  textareaEl.value = `${textareaEl.value.slice(
+    0,
+    beforePosition - 1
+  )}${textareaEl.value.slice(afterPosition)}`;
+  textareaEl.selectionStart = beforePosition - 1;
+  textareaEl.selectionEnd = beforePosition - 1;
+};
+
+const removeLettersDel = () => {
+  const beforePosition = textareaEl.selectionStart;
+  const afterPosition = textareaEl.selectionEnd;
+  if (beforePosition !== afterPosition) {
+    textareaEl.value = `${textareaEl.value.slice(
+      0,
+      beforePosition
+    )}${textareaEl.value.slice(afterPosition)}`;
+    textareaEl.selectionStart = beforePosition;
+    textareaEl.selectionEnd = beforePosition;
+    return;
+  }
+  if (afterPosition === textareaEl.value.length) {
+    return;
+  }
+  textareaEl.value = `${textareaEl.value.slice(
+    0,
+    beforePosition
+  )}${textareaEl.value.slice(afterPosition + 1)}`;
+  textareaEl.selectionStart = beforePosition;
+  textareaEl.selectionEnd = beforePosition;
+};
+
 const addLetters = (btn) => {
   if (btn.isSymbol) {
-    textareaEl.innerHTML += btn.value;
+    insertText(btn.value);
+  } else {
+    switch (btn.code) {
+      case 'Tab':
+        insertText('\t');
+        break;
+      case 'Space':
+        insertText(' ');
+        break;
+      case 'Enter':
+        insertText('\n');
+        break;
+      case 'ArrowUp':
+        insertText('\u25B2');
+        break;
+      case 'ArrowDown':
+        insertText('\u25BC');
+        break;
+      case 'ArrowLeft':
+        insertText('\u25C4');
+        break;
+      case 'ArrowRight':
+        insertText('\u25BA');
+        break;
+      case 'Backspace':
+        removeLettersBackSpace();
+        break;
+      case 'Delete':
+        removeLettersDel();
+        break;
+    }
   }
 };
 
