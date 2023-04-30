@@ -13,7 +13,11 @@ export const generateButton = (item) => {
     newSup.innerHTML = item.upperCase;
     newDiv.append(newSup);
   }
-  newDiv.innerHTML += item.value;
+  if (item.isSymbol) {
+    newDiv.innerHTML += item.value.toUpperCase();
+  } else {
+    newDiv.innerHTML += item.value;
+  }
 
   clickMapDivToBtn.set(newDiv, item);
 

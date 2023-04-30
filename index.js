@@ -2,6 +2,10 @@ import { enButtons } from './enButtons.js';
 import { generateRow } from './generateRow.js';
 import { clickMapDivToBtn, keyDownMapBtnToDiv } from './generateButton.js';
 
+let isShiftActive = false;
+
+let isCapsLkActive = false;
+
 const textareaEl = document.createElement('textarea');
 textareaEl.classList.add('textarea');
 
@@ -104,6 +108,14 @@ const removeLettersDel = () => {
 
 const addLetters = (btn) => {
   if (btn.isSymbol) {
+    if (isShiftActive) {
+      insertText(btn.upperCase);
+      return;
+    }
+    if (isCapsLkActive) {
+      insertText(btn.value.toUpperCase());
+      return;
+    }
     insertText(btn.value);
   } else {
     switch (btn.code) {
@@ -134,6 +146,9 @@ const addLetters = (btn) => {
       case 'Delete':
         removeLettersDel();
         break;
+      case 'CapsLock':
+        isCapsLkActive = !isCapsLkActive;
+        break;
     }
   }
 };
@@ -142,10 +157,19 @@ const onButtonClick = (div) => {
   div.classList.toggle('button_active');
   const chosenButton = clickMapDivToBtn.get(div);
   addLetters(chosenButton);
+  if (chosenButton.code === 'ShiftLeft' || chosenButton.code === 'ShiftRight') {
+    isShiftActive = true;
+  }
 };
 
 const onButtonClickEnd = (div) => {
-  div.classList.toggle('button_active');
+  const chosenButton = clickMapDivToBtn.get(div);
+  if (chosenButton.code !== 'CapsLock') {
+    div.classList.toggle('button_active');
+  }
+  if (chosenButton.code === 'ShiftLeft' || chosenButton.code === 'ShiftRight') {
+    isShiftActive = false;
+  }
 };
 
 [...allBtnDiv].forEach((item) => {
@@ -166,7 +190,10 @@ document.addEventListener('keydown', (ev) => {
   const keyboardBtn = mapSingleArray.filter((item) => ev.code === item.code);
   if (keyboardBtn.length) {
     addLetters(keyboardBtn[0]);
-    keyDownMapBtnToDiv.get(keyboardBtn[0]).classList.add('button_active');
+    keyDownMapBtnToDiv.get(keyboardBtn[0]).classList.toggle('button_active');
+  }
+  if (keyboardBtn[0].code === 'ShiftLeft' || keyboardBtn[0].code === 'ShiftRight') {
+    isShiftActive = true;
   }
 });
 
@@ -174,6 +201,11 @@ document.addEventListener('keyup', (ev) => {
   const mapSingleArray = [].concat(...enButtons);
   const keyboardBtn = mapSingleArray.filter((item) => ev.code === item.code);
   if (keyboardBtn.length) {
-    keyDownMapBtnToDiv.get(keyboardBtn[0]).classList.remove('button_active');
+    if (keyboardBtn[0].code !== 'CapsLock') {
+      keyDownMapBtnToDiv.get(keyboardBtn[0]).classList.toggle('button_active');
+    }
+  }
+  if (keyboardBtn[0].code === 'ShiftLeft' || keyboardBtn[0].code === 'ShiftRight') {
+    isShiftActive = false;
   }
 });

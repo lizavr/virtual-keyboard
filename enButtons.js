@@ -85,7 +85,7 @@ export const enButtons = [
     new Button('Ctrl', false, false, 'Ctrl', 'ControlLeft'),
     new Button('Win', false, false, 'Win', 'MetaLeft'),
     new Button('Alt', false, false, 'Alt', 'AltLeft'),
-    new Button('Space', false, false, 'Space', 'Space'),
+    new Button(' ', false, false, ' ', 'Space'),
     new Button('Alt', false, false, 'Alt', 'AltRight'),
     new Button('Ctrl', false, false, 'Ctrl', 'ControlRight'),
     new Button('Left', false, false, 'Left', 'ArrowLeft'),
