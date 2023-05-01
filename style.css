@@ -50,14 +50,14 @@
 .forth-row {
   display: grid;
   grid-template-rows: auto;
-  grid-template-columns: 2.4fr repeat(10, 1fr) 1.3fr 1.3fr;
+  grid-template-columns: 2.4fr repeat(11, 1fr) 1.1fr;
   gap: 1vw;
 }
 
 .fifth-row {
   display: grid;
   grid-template-rows: auto;
-  grid-template-columns: 1.3fr repeat(2, 1fr) 6fr 1fr 1fr 1.2fr repeat(2, 1fr);
+  grid-template-columns: 1.3fr repeat(2, 1fr) 6fr 1fr 1fr repeat(3, 1fr);
   gap: 1vw;
 }
 
@@ -83,4 +83,11 @@
 
 .button_dark {
   background-color: rgb(159, 116, 183);
+}
+
+.describe {
+  color: blueviolet;
+  width: 70vw;
+  margin: 3vh auto;
+  font-size: 1.5em;
 }
