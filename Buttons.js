@@ -74,7 +74,7 @@ export const buttonsArray = [
     new Button('p', 'з', true, true, 'P', 'З', 'KeyP'),
     new Button('[', 'х', true, true, '{', 'Х', 'BracketLeft'),
     new Button(']', 'ъ', true, true, '}', 'Ъ', 'BracketRight'),
-    new Button('\\', '\\', true, true, '|', '/', true, 'Backslash'),
+    new Button('\\', '\\', true, true, '|', '/', 'Backslash', true),
     new Button('Del', 'Del', false, false, 'Del', 'Del', 'Delete'),
   ],
   [
