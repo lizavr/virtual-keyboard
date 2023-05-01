@@ -8,7 +8,7 @@ export class Button {
     ruUpperCase,
     code,
     isUpperCaseVisible = false,
-    isEn = true
+    isEn = true,
   ) {
     this.enValue = enValue;
     this.ruValue = ruValue;
@@ -20,14 +20,17 @@ export class Button {
     this.isUpperCaseVisible = isUpperCaseVisible;
     this.isEn = isEn;
   }
+
   getValue() {
     return this.isEn ? this.enValue : this.ruValue;
   }
+
   getUpperCase() {
     return this.isEn ? this.enUpperCase : this.ruUpperCase;
   }
-  switchLang() {
-    this.isEn = !this.isEn;
+
+  setLang(isEn) {
+    this.isEn = isEn;
   }
 }
 
@@ -53,7 +56,7 @@ export const buttonsArray = [
       false,
       'Backspace',
       'Backspace',
-      'Backspace'
+      'Backspace',
     ),
   ],
 
@@ -82,7 +85,7 @@ export const buttonsArray = [
       false,
       'CapsLk',
       'CapsLk',
-      'CapsLock'
+      'CapsLock',
     ),
     new Button('a', 'ф', true, true, 'A', 'Ф', 'KeyA'),
     new Button('s', 'ы', true, true, 'S', 'Ы', 'KeyS'),
@@ -126,7 +129,7 @@ export const buttonsArray = [
       false,
       '\u25C4',
       '\u25C4',
-      'ArrowLeft'
+      'ArrowLeft',
     ),
     new Button(
       '\u25BC',
@@ -135,7 +138,7 @@ export const buttonsArray = [
       false,
       '\u25BC',
       '\u25BC',
-      'ArrowDown'
+      'ArrowDown',
     ),
     new Button(
       '\u25BA',
@@ -144,7 +147,7 @@ export const buttonsArray = [
       false,
       '\u25BA',
       '\u25BA',
-      'ArrowRight'
+      'ArrowRight',
     ),
   ],
 ];

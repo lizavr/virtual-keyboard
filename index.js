@@ -6,6 +6,10 @@ import {
   setButtonContent,
 } from './generateButton.js';
 
+const isLangEnKey = 'isLangEn';
+
+let isEn = sessionStorage.getItem(isLangEnKey) !== 'false';
+
 let isShiftActive = false;
 
 let isCapsLkActive = false;
@@ -18,6 +22,10 @@ const singleArray = [].concat(...buttonsArray);
 
 const textareaEl = document.createElement('textarea');
 textareaEl.classList.add('textarea');
+
+const describeTitle = document.createElement('p');
+describeTitle.classList.add('title');
+describeTitle.innerHTML = 'Keyboard';
 
 const containerEl = document.createElement('div');
 containerEl.classList.add('container');
@@ -51,8 +59,7 @@ const describeInnerSecondEl = document.createElement('p');
 describeEl.classList.add('describe');
 describeInnerFirstEl.innerHTML = 'Keyboard was created on WindowsOS.';
 describeEl.append(describeInnerFirstEl);
-describeInnerSecondEl.innerHTML =
-  'For change language use ctrlLeft + altLeft, please.';
+describeInnerSecondEl.innerHTML = 'For change language use ctrlLeft + altLeft, please.';
 describeEl.append(describeInnerSecondEl);
 
 keyboardEl.append(firstRowEl);
@@ -60,6 +67,8 @@ keyboardEl.append(secondRowEl);
 keyboardEl.append(thirdRowEl);
 keyboardEl.append(forthRowEl);
 keyboardEl.append(fifthRowEl);
+
+containerEl.append(describeTitle);
 
 containerEl.append(textareaEl);
 
@@ -76,7 +85,7 @@ const insertText = (value) => {
   const afterPosition = textareaEl.selectionEnd;
   textareaEl.value = `${textareaEl.value.slice(
     0,
-    beforePosition
+    beforePosition,
   )}${value}${textareaEl.value.slice(afterPosition)}`;
   textareaEl.selectionStart = beforePosition + 1;
   textareaEl.selectionEnd = beforePosition + 1;
@@ -88,7 +97,7 @@ const removeLettersBackSpace = () => {
   if (beforePosition !== afterPosition) {
     textareaEl.value = `${textareaEl.value.slice(
       0,
-      beforePosition
+      beforePosition,
     )}${textareaEl.value.slice(afterPosition)}`;
     textareaEl.selectionStart = beforePosition;
     textareaEl.selectionEnd = beforePosition;
@@ -99,7 +108,7 @@ const removeLettersBackSpace = () => {
   }
   textareaEl.value = `${textareaEl.value.slice(
     0,
-    beforePosition - 1
+    beforePosition - 1,
   )}${textareaEl.value.slice(afterPosition)}`;
   textareaEl.selectionStart = beforePosition - 1;
   textareaEl.selectionEnd = beforePosition - 1;
@@ -111,7 +120,7 @@ const removeLettersDel = () => {
   if (beforePosition !== afterPosition) {
     textareaEl.value = `${textareaEl.value.slice(
       0,
-      beforePosition
+      beforePosition,
     )}${textareaEl.value.slice(afterPosition)}`;
     textareaEl.selectionStart = beforePosition;
     textareaEl.selectionEnd = beforePosition;
@@ -122,7 +131,7 @@ const removeLettersDel = () => {
   }
   textareaEl.value = `${textareaEl.value.slice(
     0,
-    beforePosition
+    beforePosition,
   )}${textareaEl.value.slice(afterPosition + 1)}`;
   textareaEl.selectionStart = beforePosition;
   textareaEl.selectionEnd = beforePosition;
@@ -130,6 +139,10 @@ const removeLettersDel = () => {
 
 const addLetters = (btn) => {
   if (btn.isSymbol) {
+    if (isCapsLkActive && isShiftActive) {
+      insertText(btn.getValue());
+      return;
+    }
     if (isShiftActive) {
       insertText(btn.getUpperCase());
       return;
@@ -171,20 +184,30 @@ const addLetters = (btn) => {
       case 'CapsLock':
         isCapsLkActive = !isCapsLkActive;
         break;
+      default:
+        break;
     }
   }
 };
 
+const setLang = () => singleArray.forEach((item) => {
+  item.setLang(isEn);
+  setButtonContent(item, keyDownMapBtnToDiv.get(item));
+});
+
 const switchLangAllBtn = () => {
-  singleArray.forEach((item) => {
-    item.switchLang();
-    setButtonContent(item, keyDownMapBtnToDiv.get(item));
-  });
+  isEn = !isEn;
+  sessionStorage.setItem(isLangEnKey, isEn);
+  setLang();
 };
 
 const onButtonClick = (div) => {
-  div.classList.toggle('button_active');
   const chosenButton = clickMapDivToBtn.get(div);
+  if (chosenButton.code === 'CapsLock') {
+    div.classList.toggle('button_active');
+  } else {
+    div.classList.add('button_active');
+  }
   addLetters(chosenButton);
   if (chosenButton.code === 'ShiftLeft' || chosenButton.code === 'ShiftRight') {
     isShiftActive = true;
@@ -206,7 +229,7 @@ const onButtonClick = (div) => {
 const onButtonClickEnd = (div) => {
   const chosenButton = clickMapDivToBtn.get(div);
   if (chosenButton.code !== 'CapsLock') {
-    div.classList.toggle('button_active');
+    div.classList.remove('button_active');
   }
   if (chosenButton.code === 'ShiftLeft' || chosenButton.code === 'ShiftRight') {
     isShiftActive = false;
@@ -234,13 +257,15 @@ const onButtonClickEnd = (div) => {
 document.addEventListener('keydown', (ev) => {
   ev.preventDefault();
   const keyboardBtn = singleArray.filter((item) => ev.code === item.code);
-  if (keyboardBtn.length) {
-    addLetters(keyboardBtn[0]);
+  if (keyboardBtn[0].code === 'CapsLock') {
     keyDownMapBtnToDiv.get(keyboardBtn[0]).classList.toggle('button_active');
+  } else {
+    keyDownMapBtnToDiv.get(keyboardBtn[0]).classList.add('button_active');
   }
+  addLetters(keyboardBtn[0]);
   if (
-    keyboardBtn[0].code === 'ShiftLeft' ||
-    keyboardBtn[0].code === 'ShiftRight'
+    keyboardBtn[0].code === 'ShiftLeft'
+    || keyboardBtn[0].code === 'ShiftRight'
   ) {
     isShiftActive = true;
   }
@@ -262,12 +287,12 @@ document.addEventListener('keyup', (ev) => {
   const keyboardBtn = singleArray.filter((item) => ev.code === item.code);
   if (keyboardBtn.length) {
     if (keyboardBtn[0].code !== 'CapsLock') {
-      keyDownMapBtnToDiv.get(keyboardBtn[0]).classList.toggle('button_active');
+      keyDownMapBtnToDiv.get(keyboardBtn[0]).classList.remove('button_active');
     }
   }
   if (
-    keyboardBtn[0].code === 'ShiftLeft' ||
-    keyboardBtn[0].code === 'ShiftRight'
+    keyboardBtn[0].code === 'ShiftLeft'
+    || keyboardBtn[0].code === 'ShiftRight'
   ) {
     isShiftActive = false;
   }
@@ -278,3 +303,5 @@ document.addEventListener('keyup', (ev) => {
     isAltActive = false;
   }
 });
+
+setLang();

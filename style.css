@@ -5,17 +5,17 @@
 
 .textarea {
   display: block;
-  width: 70vw;
-  margin: 10vh auto;
-  height: 25vh;
-  padding: 20px;
-  color: rgb(125, 61, 189);
-  font-size: 3em;
+  width: 60vw;
+  margin: 5vh auto;
+  height: 20vh;
+  padding: 15px;
+  color: rgb(251, 0, 243);
+  font-size: 2em;
   border: 3px solid rgb(125, 61, 189);
 }
 
 .keyboard {
-  width: 70vw;
+  width: 60vw;
   margin: 0 auto;
   border: 3px solid rgb(125, 61, 189);
   padding: 10px;
@@ -23,7 +23,7 @@
   gap: 1vw;
   grid-template-columns: auto;
   grid-template-rows: 1fr auto;
-  background-color: rgb(251, 230, 244);
+  background-color: rgb(158, 158, 158);
 }
 
 .first-row {
@@ -63,31 +63,61 @@
 
 .button {
   border: 2px solid rgb(24, 4, 42);
-  padding: 5px;
+  padding: 10px;
   text-align: center;
-  background-color: rgb(196, 144, 224);
-  font-weight: 500;
-  color: rgb(11, 3, 71);
+  background-color: rgb(63, 61, 63);
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+  transition: all ease 200ms;
 }
+
 .button:hover {
   cursor: pointer;
-  background-color: rgb(55, 41, 62);
+  background-color: rgb(40, 36, 42);
 }
 
 .button.button_active {
-  background-color: rgb(93, 155, 160);
+  background-color: rgb(70, 48, 70);
   cursor: pointer;
-  box-shadow: 0 0 10px 5px #eee994;
-  color: #eee994;
+  box-shadow: 0 0 10px 5px #f600dd;
+  color: #f600dd;
+  animation: color 200ms ease;
+}
+
+@keyframes color {
+  from {
+    color: rgb(255, 255, 255);
+    background-color: rgb(63, 61, 63);
+    box-shadow: 0;
+  }
+  50% {
+    color: #001df6;
+    background-color: #001df6;
+    box-shadow: 0 0 10px 5px #001df6;
+  }
+  100% {
+    color: #f600dd;
+    background-color: #f600dd;
+    box-shadow: 0 0 10px 5px #f600dd;
+  }
 }
 
 .button_dark {
-  background-color: rgb(159, 116, 183);
+  background-color: rgb(36, 34, 37);
 }
 
 .describe {
   color: blueviolet;
-  width: 70vw;
+  width: 60vw;
   margin: 3vh auto;
   font-size: 1.5em;
+}
+
+.title{
+  color: rgb(129, 0, 250);
+  text-align: center;
+  font-weight: 700;
+  margin: 0 auto;
+  font-size: 2em;
+  text-transform: uppercase;
 }

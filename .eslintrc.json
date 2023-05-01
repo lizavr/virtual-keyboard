@@ -10,7 +10,6 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "parser": "babel-eslint",
     "rules": {
         "linebreak-style": 0,
         "global-require": 0,
