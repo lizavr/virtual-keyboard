@@ -257,6 +257,9 @@ const onButtonClickEnd = (div) => {
 document.addEventListener('keydown', (ev) => {
   ev.preventDefault();
   const keyboardBtn = singleArray.filter((item) => ev.code === item.code);
+  if (!keyboardBtn.length) {
+    return;
+  }
   if (keyboardBtn[0].code === 'CapsLock') {
     keyDownMapBtnToDiv.get(keyboardBtn[0]).classList.toggle('button_active');
   } else {
@@ -285,10 +288,11 @@ document.addEventListener('keydown', (ev) => {
 
 document.addEventListener('keyup', (ev) => {
   const keyboardBtn = singleArray.filter((item) => ev.code === item.code);
-  if (keyboardBtn.length) {
-    if (keyboardBtn[0].code !== 'CapsLock') {
-      keyDownMapBtnToDiv.get(keyboardBtn[0]).classList.remove('button_active');
-    }
+  if (!keyboardBtn.length) {
+    return;
+  }
+  if (keyboardBtn[0].code !== 'CapsLock') {
+    keyDownMapBtnToDiv.get(keyboardBtn[0]).classList.remove('button_active');
   }
   if (
     keyboardBtn[0].code === 'ShiftLeft'
