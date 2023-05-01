@@ -5,9 +5,9 @@
 
 .textarea {
   display: block;
-  width: 80vw;
+  width: 70vw;
   margin: 5vh auto;
-  height: 20vh;
+  height: 15vh;
   padding: 15px;
   color: rgb(251, 0, 243);
   font-size: 2em;
@@ -63,8 +63,8 @@
 
 .button {
   border: 2px solid rgb(24, 4, 42);
-  padding: 20px 10px;
-  font-size: 1.2em;
+  padding: 10px 5px;
+  font-size: 1em;
   text-align: center;
   background-color: rgb(63, 61, 63);
   font-weight: 700;
@@ -124,5 +124,5 @@
 }
 
 .sup{
-  margin-right: 20px;
+  margin-right: 10px;
 }
