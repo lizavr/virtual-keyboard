@@ -140,7 +140,7 @@ const removeLettersDel = () => {
 const addLetters = (btn) => {
   if (btn.isSymbol) {
     if (isCapsLkActive && isShiftActive) {
-      insertText(btn.getValue());
+      insertText(btn.getUpperCase().toLowerCase());
       return;
     }
     if (isShiftActive) {
