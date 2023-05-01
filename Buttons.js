@@ -36,7 +36,7 @@ export class Button {
 
 export const buttonsArray = [
   [
-    new Button('`', 'ё', true, true, '~', 'Ё', 'Backquote', true),
+    new Button('`', 'ё', true, true, '~', 'Ё', 'Backquote'),
     new Button('1', '1', true, true, '!', '!', 'Digit1', true),
     new Button('2', '2', true, true, '@', '"', 'Digit2', true),
     new Button('3', '3', true, true, '#', '№', 'Digit3', true),

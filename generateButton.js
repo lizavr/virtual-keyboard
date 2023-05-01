@@ -6,6 +6,7 @@ export const setButtonContent = (item, newDiv) => {
   newDiv.innerHTML = '';
   if (item.isUpperCaseVisible) {
     const newSup = document.createElement('sup');
+    newSup.classList.add('sup');
     newSup.innerHTML = item.getUpperCase();
     newDiv.append(newSup);
   }

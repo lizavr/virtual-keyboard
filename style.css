@@ -5,7 +5,7 @@
 
 .textarea {
   display: block;
-  width: 60vw;
+  width: 80vw;
   margin: 5vh auto;
   height: 20vh;
   padding: 15px;
@@ -15,7 +15,7 @@
 }
 
 .keyboard {
-  width: 60vw;
+  width: 80vw;
   margin: 0 auto;
   border: 3px solid rgb(125, 61, 189);
   padding: 10px;
@@ -63,7 +63,8 @@
 
 .button {
   border: 2px solid rgb(24, 4, 42);
-  padding: 10px;
+  padding: 20px 10px;
+  font-size: 1.2em;
   text-align: center;
   background-color: rgb(63, 61, 63);
   font-weight: 700;
@@ -108,7 +109,7 @@
 
 .describe {
   color: blueviolet;
-  width: 60vw;
+  width: 80vw;
   margin: 3vh auto;
   font-size: 1.5em;
 }
@@ -120,4 +121,8 @@
   margin: 0 auto;
   font-size: 2em;
   text-transform: uppercase;
+}
+
+.sup{
+  margin-right: 20px;
 }
