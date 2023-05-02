@@ -287,6 +287,7 @@ document.addEventListener('keydown', (ev) => {
 });
 
 document.addEventListener('keyup', (ev) => {
+  ev.preventDefault();
   const keyboardBtn = singleArray.filter((item) => ev.code === item.code);
   if (!keyboardBtn.length) {
     return;

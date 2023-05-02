@@ -116,7 +116,7 @@ export const buttonsArray = [
     new Button('Shift', 'Shift', false, false, 'Shift', 'Shift', 'ShiftRight'),
   ],
   [
-    new Button('Ctrl', 'Ctrl', false, false, 'Ctrl', 'Shift', 'ControlLeft'),
+    new Button('Ctrl', 'Ctrl', false, false, 'Ctrl', 'Ctrl', 'ControlLeft'),
     new Button('Win', 'Win', false, false, 'Win', 'Win', 'MetaLeft'),
     new Button('Alt', 'Alt', false, false, 'Alt', 'Alt', 'AltLeft'),
     new Button(' ', ' ', false, false, ' ', 'Space', 'Space'),
