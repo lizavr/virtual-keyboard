@@ -201,7 +201,10 @@ const switchLangAllBtn = () => {
   setLang();
 };
 
+let lastDivClicked = null;
+
 const onButtonClick = (div) => {
+  lastDivClicked = div;
   const chosenButton = clickMapDivToBtn.get(div);
   if (chosenButton.code === 'CapsLock') {
     div.classList.toggle('button_active');
@@ -226,7 +229,12 @@ const onButtonClick = (div) => {
   }
 };
 
-const onButtonClickEnd = (div) => {
+const onButtonClickEnd = () => {
+  if (!lastDivClicked) {
+    return;
+  }
+  const div = lastDivClicked;
+  lastDivClicked = null;
   const chosenButton = clickMapDivToBtn.get(div);
   if (chosenButton.code !== 'CapsLock') {
     div.classList.remove('button_active');
@@ -244,15 +252,12 @@ const onButtonClickEnd = (div) => {
 
 [...allBtnDiv].forEach((item) => {
   item.addEventListener('mousedown', (event) => {
+    event.preventDefault();
     onButtonClick(event.currentTarget);
   });
 });
 
-[...allBtnDiv].forEach((item) => {
-  item.addEventListener('mouseup', (event) => {
-    onButtonClickEnd(event.currentTarget);
-  });
-});
+document.addEventListener('mouseup', onButtonClickEnd);
 
 document.addEventListener('keydown', (ev) => {
   ev.preventDefault();
